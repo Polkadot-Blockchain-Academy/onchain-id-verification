@@ -10,7 +10,7 @@ import { api, mapRawIdentity, columns, invColumns } from './consts'
 
 export const App = () => {
   const [members, setMembers] = useState<string[]>([])
-  const [idResults, setIdResults] = useState<object[]>([])
+  const [idResults, setIdResults] = useState<any[]>([])
   const [loader, setLoader] = useState<boolean>(false)
   const [visible, setVisible] = useState<boolean>(true)
   const [invalidAddresses, setInvalidAddresses] = useState<object[]>([])
@@ -28,7 +28,7 @@ export const App = () => {
       })
 
       const identities = await Promise.all(checkIds.map(address => api.query.Identity.IdentityOf.getValue(address)))
-      const result = identities?.map((identity, idx) => ({
+      const result = identities?.map((identity: any, idx: number) => ({
         address: addresses[idx],
         ...mapRawIdentity(identity),
       }))
