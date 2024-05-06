@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Binary } from "polkadot-api"
 import { DotQueries, dot } from '@polkadot-api/descriptors'
 import { polkadotClient } from './clients'
@@ -8,31 +9,38 @@ export const columns = [
         dataIndex: 'hasId',
         key: 'hasId',
         render: (v: boolean) => v ? "✅" : "🚫",
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
     },
     {
         title: 'Display Name',
         dataIndex: 'display',
         key: 'display',
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
     },
     {
         title: 'Legal Name',
         dataIndex: 'name',
         key: 'name',
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
     },
     {
         title: 'Github',
         dataIndex: 'github',
         key: 'github',
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
     },
     {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
     },
     {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',
+        sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
+        onFilter: (value: string, record: { name: string | string[]; }) => record.name.indexOf(value as string) === 0,
     },
 ];
 
