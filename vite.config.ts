@@ -6,4 +6,10 @@ export default defineConfig({
   plugins: [
     react()
   ],
+  build: {
+    outDir: "build",
+  },
+  optimizeDeps: {
+    include: ["react/jsx-runtime"],
+  },
 })
