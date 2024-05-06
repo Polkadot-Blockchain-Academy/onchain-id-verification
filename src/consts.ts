@@ -40,7 +40,7 @@ export const columns = [
 
 export const invColumns = [
     {
-        title: 'Invalid',
+        title: 'Invalid Addresses',
         dataIndex: 'address',
         key: 'address',
     },
