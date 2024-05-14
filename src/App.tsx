@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SetStateAction, useEffect, useState } from 'react'
-import { Alert, Button, Input, Table } from 'antd'
+import { SetStateAction, useState } from 'react'
+import { Button, Input, Table } from 'antd'
 import { isValidAddress } from "@polkadot-ui/utils"
 const { TextArea } = Input
 
@@ -12,14 +12,12 @@ export const App = () => {
   const [members, setMembers] = useState<string[]>([])
   const [idResults, setIdResults] = useState<any[]>([])
   const [loader, setLoader] = useState<boolean>(false)
-  const [visible, setVisible] = useState<boolean>(true)
   const [invalidAddresses, setInvalidAddresses] = useState<object[]>([])
 
   const getIdentities = async (addresses: string[]) => {
     try {
       const invAdd: SetStateAction<object[]> = []
       const checkIds = addresses.filter((id: string) => {
-        console.log('isValidAddress(id)', id, isValidAddress(id))
         if (isValidAddress(id)) {
           return id
         } else {
@@ -60,14 +58,6 @@ export const App = () => {
     }
   }
 
-  const handleClose = () => {
-    setVisible(false);
-  };
-
-  useEffect(() => {
-    members.length > 30 ? setVisible(true) : setVisible(false)
-  }, [members])
-
   return (
     <>
       <h1>
@@ -75,14 +65,10 @@ export const App = () => {
       </h1>
       <h2>On-Chain Identity Retrieve tool</h2>
       <div className="card">
-        <Alert message="Do not add more than 30 comma-separated addresses" type="success" />
         <TextArea rows={10} onChange={(val) => {
           setMembers(val.target.value.replace(/\s/g, "").replace("\"", "").replace("'", "").replace("`", "").split(","))
         }} />
-        {visible && (
-          <Alert message="Please do not add more than 30 addresses" type="error" closable afterClose={handleClose} />
-        )}
-        <Button disabled={!members.length || members.length > 30} onClick={() => {
+        <Button disabled={!members.length} onClick={() => {
           setIdResults([])
           setInvalidAddresses([])
           getIdentities(members)
