@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SetStateAction, useState } from 'react'
-import { Button, Input, Table } from 'antd'
+import { Alert, Button, Input, Table } from 'antd'
 import { isValidAddress } from "@polkadot-ui/utils"
 const { TextArea } = Input
 
@@ -65,6 +65,7 @@ export const App = () => {
       </h1>
       <h2>On-Chain Identity Retrieve tool</h2>
       <div className="card">
+        <Alert message="All entries must be comma-separated without quotes" type="success" />
         <TextArea rows={10} onChange={(val) => {
           setMembers(val.target.value.replace(/\s/g, "").replace("\"", "").replace("'", "").replace("`", "").split(","))
         }} />
