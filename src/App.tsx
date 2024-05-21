@@ -7,6 +7,7 @@ const { TextArea } = Input
 
 import './App.css'
 import { api, mapRawIdentity, columns, invColumns } from './consts'
+import { AccountId, SS58String } from 'polkadot-api'
 
 export const App = () => {
   const [members, setMembers] = useState<string[]>([])
@@ -31,21 +32,33 @@ export const App = () => {
         ...mapRawIdentity(identity),
       }))
 
+      const convertAnySs58AddressToGenericSs58Format = (input: SS58String) => {
+        const codec = AccountId()
+        return codec.dec(codec.enc(input))
+      }
+
       const dataSource: object[] = [];
       let i = 1;
       result?.forEach((r: { [s: string]: any }) => {
+
         let obj: any = {
           key: i++,
           address: '',
           github: '',
           email: '',
           name: '',
-          display: ''
+          display: '',
+          substrate: ''
         }
         for (let [key, value] of Object.entries(r)) {
           obj[key] = value
           if (key === "display") {
             obj.hasId = true
+          }
+          if (key === "address") {
+            if (isValidAddress(value)) {
+              obj.substrate = convertAnySs58AddressToGenericSs58Format(value)
+            }
           }
         }
         dataSource.push(obj)
