@@ -36,6 +36,11 @@ export const columns = [
         dataIndex: 'address',
         key: 'address',
     },
+    {
+        title: 'Substrate Address',
+        dataIndex: 'substrate',
+        key: 'substrate',
+    },
 ];
 
 export const invColumns = [
