@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@polkadot-api/descriptors": "^0.0.1",
-    "@polkadot-ui/utils": "0.0.1-alpha.2",
+    "@polkadot-ui/utils": "0.0.1-alpha.5",
     "antd": "^5.17.0",
     "polkadot-api": "^0.7.2",
     "react": "^18.3.1",
